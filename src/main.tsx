@@ -28,7 +28,7 @@ const router = createBrowserRouter(
       <Route errorElement={<ErrorPage />}>
         <Route index element={<Index />} />
         <Route
-          path="/posts"
+          path="/posts/:postId"
           element={<Post />}
           //loader={postLoader}
           //action={postAction}

@@ -6,16 +6,16 @@ import { Box } from "@mui/material";
 export default function Footer() {
   return (
     <Box
-        position={"fixed"}
-        bottom={'0'}
+        position={"relative"}
+     
         sx={{
             backgroundColor: (theme) =>
             theme.palette.mode === "light"
                 ? theme.palette.grey[200]
-                : theme.palette.grey[800],
-            p: 6,
+                : theme.palette.grey[900],
+            p: 4,
             width: "100vw",
-            maxHeight: "10vh", 
+            height: "5vh", 
         }}
       component="footer"
     >

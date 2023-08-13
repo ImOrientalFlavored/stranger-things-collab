@@ -17,8 +17,16 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Container } from '@mui/material';
-
+import { Container, InputBase, colors } from '@mui/material';
+import { ColorModeContext, tokens} from "../../theme";
+import { useContext } from "react";
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+//import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
+import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
+//import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 //Icons
 import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
@@ -100,12 +108,14 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 type NavUIProp ={
-  children:React.ReactNode
+  children?:React.ReactNode
 }
 
 export default function NavUI({children}:NavUIProp) {
     
   const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const colorMode = useContext(ColorModeContext);
   const [open, setOpen] = useState(false);
   
 
@@ -125,7 +135,6 @@ export default function NavUI({children}:NavUIProp) {
       }}>
         <CssBaseline />
         <AppBar position="fixed" open={open} sx={{
-          bgcolor:"#ff8a36",
         }}>
             <Toolbar>
               <IconButton
@@ -140,11 +149,44 @@ export default function NavUI({children}:NavUIProp) {
               >
                 <MenuIcon />
               </IconButton>
-              
-              <Typography variant="h6" zIndex={"10"} noWrap component="div" sx={{ 
-                textShadow:"0 0 1em #414141"}}>
-                Stranger's Things
-              </Typography>
+
+              <Box display={'flex'} justifyContent={'space-between'} width={'100%'}>
+
+                {//"Left side of Top Nav - Logo, SiteName, Search"
+                }
+                <Box display={'flex'}>
+                  <Typography variant="h6" zIndex={"10"} noWrap component="div" sx={{ 
+                    textShadow:"0 0 1em #414141"}}>
+                    Stranger's Things
+                  </Typography>
+                  <Box bgcolor={colors.primary[500]} sx={{ml:"5px" ,borderRadius:"20px"}}>
+                    <InputBase sx={{p:"0 10px 0 10px" ,borderRadius:"20px"}}/>
+                  </Box>
+                  
+                </Box>
+
+                {//"Right side of Top Nav - Icons(Theme, Notifications, Profile, Login, Profile, Logout)"
+                }
+                <Box display={'flex'}>
+                  <IconButton onClick={colorMode.toggleColorMode}>
+                    {theme.palette.mode === 'dark' ? (
+                      <DarkModeOutlinedIcon />
+                    ):(
+                      <LightModeOutlinedIcon />
+                    )}
+                  </IconButton>
+                  <IconButton>
+                    <NotificationsOutlinedIcon />
+                  </IconButton>
+                  <IconButton>
+                    <AccountBoxOutlinedIcon />
+                  </IconButton>
+                  <IconButton>
+                    <LoginOutlinedIcon />
+                  </IconButton>
+
+                </Box>
+              </Box>
               
             </Toolbar>
         </AppBar>
@@ -185,8 +227,12 @@ export default function NavUI({children}:NavUIProp) {
           </List>
           <Divider />
         </Drawer>
+        <Box component="main" bgcolor={colors.primary[900]} color={colors.greenAccent[400]} sx={{ flexGrow: 1, }}>
           <DrawerHeader />
+          
             {children}
+        
+        </Box>
       </Box>
     </Container>
   );

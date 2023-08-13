@@ -17,7 +17,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Container, InputBase } from '@mui/material';
+import { Container, InputBase, colors } from '@mui/material';
 import { ColorModeContext, tokens} from "../../theme";
 import { useContext } from "react";
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
@@ -227,8 +227,12 @@ export default function NavUI({children}:NavUIProp) {
           </List>
           <Divider />
         </Drawer>
+        <Box component="main" bgcolor={colors.primary[900]} color={colors.greenAccent[400]} sx={{ flexGrow: 1, }}>
           <DrawerHeader />
+          
             {children}
+        
+        </Box>
       </Box>
     </Container>
   );

@@ -1,17 +1,22 @@
+import ContentPane from "../components/layout/ContentPane";
 import Footer from "../components/layout/Footer";
 import NavUI from "../components/layout/NavUI";
 import { ColorModeContext, useMode } from "../theme"
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Outlet } from 'react-router-dom'
 
 export default function Root(){
     const [theme, colorMode] = useMode();
     return (
-        <ColorModeContext.Provider value={colorMode}>
+        <ColorModeContext.Provider value={colorMode as {toggleColorMode:()=>void}}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <NavUI>
-                    <Footer />
+                    <ContentPane>
+                        <Outlet />
+                    </ContentPane>
                 </NavUI>
+                    <Footer />
             </ThemeProvider>
         </ColorModeContext.Provider>
     )

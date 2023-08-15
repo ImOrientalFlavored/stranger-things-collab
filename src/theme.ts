@@ -59,7 +59,7 @@ red: {
     900: "#2f0b0a"
 },
 */
-const themePalette = [
+const palette = [
     {
         grey: {
           100: "#e0e0e0",
@@ -175,7 +175,7 @@ const themePalette = [
 
 ]
 export const tokens = (mode: string) => ({
-  ...(mode === "dark" ? themePalette[0]:themePalette[1])}
+  ...(mode === "dark" ? palette[0]:palette[1])}
   );
 
 //mui theme setting

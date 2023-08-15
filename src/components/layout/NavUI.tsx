@@ -17,7 +17,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Container, InputBase, colors } from '@mui/material';
+import { Container, InputBase } from '@mui/material';
 import { ColorModeContext, tokens} from "../../theme";
 import { useContext } from "react";
 import { AuthContext } from '../../routes/Root'
@@ -30,7 +30,7 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 //import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 //Icons
 import MenuIcon from '@mui/icons-material/Menu';
-import AddIcon from '@mui/icons-material/Add';
+//import AddIcon from '@mui/icons-material/Add';
 import FlagIcon from '@mui/icons-material/Flag';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MailIcon from '@mui/icons-material/Mail';

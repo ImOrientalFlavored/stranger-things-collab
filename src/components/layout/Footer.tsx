@@ -2,6 +2,8 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { Box } from "@mui/material";
+import SvgIcon from '@mui/material/SvgIcon';
+import Logo from "../logo";
 
 export default function Footer() {
   return (
@@ -21,7 +23,11 @@ export default function Footer() {
     >
       <Container maxWidth="sm">
         <Typography variant="body2" color="text.secondary" align="center">
-          {"Copyright © "}
+          <SvgIcon>
+            <Logo />  
+          </SvgIcon>
+          <img src="/ori-logo.png" alt="logo" width={'35px'} />
+          {" © "}
           <Link color="inherit" href="/">
             ImOrientalFlavored
           </Link>{" "}

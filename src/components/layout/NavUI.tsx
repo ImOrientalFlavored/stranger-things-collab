@@ -20,10 +20,11 @@ import ListItemText from '@mui/material/ListItemText';
 import { Container, InputBase, colors } from '@mui/material';
 import { ColorModeContext, tokens} from "../../theme";
 import { useContext } from "react";
+import { AuthContext } from '../../routes/Root'
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-//import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 //import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
@@ -31,9 +32,9 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
 import FlagIcon from '@mui/icons-material/Flag';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import StadiumIcon from '@mui/icons-material/Stadium';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import MailIcon from '@mui/icons-material/Mail';
+import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 //
 
 const drawerWidth = 240;
@@ -63,7 +64,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
-  padding: theme.spacing(0, 1),
+  padding: theme.spacing(0, 2),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
@@ -108,14 +109,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 type NavUIProp ={
+  setIsLoggedIn: (arg0: boolean)=>void,
   children?:React.ReactNode
 }
 
-export default function NavUI({children}:NavUIProp) {
+export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
     
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const isLoggedIn = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   
 
@@ -159,13 +162,13 @@ export default function NavUI({children}:NavUIProp) {
                     textShadow:"0 0 1em #414141"}}>
                     Stranger's Things
                   </Typography>
-                  <Box bgcolor={colors.primary[500]} sx={{ml:"5px" ,borderRadius:"20px"}}>
-                    <InputBase sx={{p:"0 10px 0 10px" ,borderRadius:"20px"}}/>
+                  <Box bgcolor={colors.primary[100]}  sx={{ml:"5px" ,borderRadius:"20px"}}>
+                    <InputBase sx={{p:"0 10px 0 10px", color:colors.primary[800] ,borderRadius:"20px"}}/>
                   </Box>
                   
                 </Box>
 
-                {//"Right side of Top Nav - Icons(Theme, Notifications, Profile, Login, Profile, Logout)"
+                {//"Right side of Top Nav - Icons(Theme, Notifications, Profile, Login/Logout)"
                 }
                 <Box display={'flex'}>
                   <IconButton onClick={colorMode.toggleColorMode}>
@@ -175,14 +178,19 @@ export default function NavUI({children}:NavUIProp) {
                       <LightModeOutlinedIcon />
                     )}
                   </IconButton>
-                  <IconButton>
-                    <NotificationsOutlinedIcon />
-                  </IconButton>
-                  <IconButton>
-                    <AccountBoxOutlinedIcon />
-                  </IconButton>
-                  <IconButton>
-                    <LoginOutlinedIcon />
+                  {isLoggedIn ?<> 
+                      <IconButton>
+                        <NotificationsOutlinedIcon />
+                      </IconButton>
+                      <IconButton>
+                        <AccountBoxOutlinedIcon />
+                      </IconButton>
+                    </>
+                    :
+                      ''
+                  }
+                  <IconButton onClick={()=>setIsLoggedIn(!isLoggedIn)}>
+                    {!isLoggedIn ? <LoginOutlinedIcon /> : <LogoutOutlinedIcon /> }
                   </IconButton>
 
                 </Box>
@@ -190,7 +198,7 @@ export default function NavUI({children}:NavUIProp) {
               
             </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={open} sx={{backgroundColor:colors.primary[900]}}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -198,11 +206,11 @@ export default function NavUI({children}:NavUIProp) {
           </DrawerHeader>
           <Divider />
           <List>
-            {['Add Contestant', 'Get set!!', 'Contenders', 'Finish Line', 'Calendar'].map((text, index) => (
+            {['Categories', 'Your Posts', 'Messages', 'Favorites', 'Settings'].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                 <ListItemButton
                   sx={{
-                    minHeight: 48,
+                    minHeight: 40,
                     justifyContent: open ? 'initial' : 'center',
                     px: 2.5,
                   }}
@@ -214,11 +222,11 @@ export default function NavUI({children}:NavUIProp) {
                       justifyContent: 'center',
                     }}
                   >
-                    {index === 0 ? <AddIcon /> : ''}
+                    {index === 0 ? theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon /> : ''}
                     {index === 1 ? <FlagIcon /> : ''}
-                    {index === 2 ? <StadiumIcon /> : ''}
-                    {index === 3 ? <EmojiEventsIcon /> : ''}
-                    {index === 4 ? <CalendarMonthIcon /> : ''}
+                    {index === 3 ? <MailIcon /> : ''}
+                    {index === 2 ? <FavoriteBorderIcon /> : ''}
+                    {index === 4 ? <SettingsTwoToneIcon /> : ''}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
@@ -228,7 +236,7 @@ export default function NavUI({children}:NavUIProp) {
           <Divider />
         </Drawer>
         <Box component="main" bgcolor={colors.primary[900]} color={colors.greenAccent[400]} sx={{ flexGrow: 1, }}>
-          <DrawerHeader />
+          <DrawerHeader sx={{backgroundColor:colors.primary[900]}} />
           
             {children}
         

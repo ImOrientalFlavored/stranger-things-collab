@@ -224,8 +224,8 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
                   >
                     {index === 0 ? theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon /> : ''}
                     {index === 1 ? <FlagIcon /> : ''}
-                    {index === 3 ? <MailIcon /> : ''}
-                    {index === 2 ? <FavoriteBorderIcon /> : ''}
+                    {index === 2 ? <MailIcon /> : ''}
+                    {index === 3 ? <FavoriteBorderIcon /> : ''}
                     {index === 4 ? <SettingsTwoToneIcon /> : ''}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />

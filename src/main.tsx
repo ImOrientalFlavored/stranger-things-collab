@@ -10,7 +10,7 @@ import "./index.css";
 //Routes
 import Root from "./routes/Root";
 import ErrorPage from "./ErrorPage";
-import Index from "./routes/Index";
+import Index, {loader as indexLoader} from "./routes/Index";
 import EditPost from "./routes/Edit";
 import Post from "./routes/Post";
 import SignInForm from "./routes/SignInForm";
@@ -27,7 +27,11 @@ const router = createBrowserRouter(
       errorElement={<ErrorPage />}
     >
       <Route errorElement={<ErrorPage />}>
-        <Route index element={<Index />} />
+        <Route 
+          index 
+          element={<Index />}
+          loader={indexLoader}
+        />
         <Route
           path="/posts/:postId"
           element={<Post />}

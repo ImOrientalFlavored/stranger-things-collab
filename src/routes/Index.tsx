@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import fetchPosts from '../api'
 import PostCard from '../components/layout/PostCard';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import PostType from '../types/PostType'
 
 export default function Index(){
@@ -20,17 +20,34 @@ export default function Index(){
     console.log(fetchedPosts);
 
     return (
-        <>
-            <Typography variant='h2'>
-                Index
-            </Typography>
-            <Box display="flex" flexWrap={"wrap"} gap={"1rem"}>
-                {
-                    fetchedPosts.map((post)=>{
-                    return <PostCard key={post.id} post={post}/>
-                    })
-                }
+        <Box>
+            {/* Page Title */}
+            <Box>
+                <Typography variant='h1' justifySelf={"center"}>
+                    Index
+                </Typography>
+                <Divider />
             </Box>
-        </>
+            {/* Category Group */}
+            <Box>
+            {/* Category Header*/}
+                <Box>
+                    <Typography variant='h1' justifySelf={"center"}>
+                        Recent Posts
+                    </Typography>
+                </Box>
+                {/* Category Post Carousel*/}
+                <Box display="flex" flexWrap={"wrap"} gap={"1rem"}>
+                    {
+                        fetchedPosts.map((post)=>{
+                            return <PostCard key={post.id} post={post}/>
+                        })
+                    }
+                </Box>
+                <Divider/>
+            </Box>
+
+
+        </Box>
     )
 }

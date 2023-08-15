@@ -15,6 +15,7 @@ import EditPost from "./routes/Edit";
 import Post from "./routes/Post";
 import SignInForm from "./routes/SignInForm";
 import SignUpForm from "./routes/SignUpForm";
+import PostForm from "./routes/PostForm";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,12 @@ const router = createBrowserRouter(
         <Route
           path="/posts/:postId"
           element={<Post />}
+          //loader={postLoader}
+          //action={postAction}
+        />
+        <Route
+          path="/posts/form"
+          element={<PostForm />}
           //loader={postLoader}
           //action={postAction}
         />

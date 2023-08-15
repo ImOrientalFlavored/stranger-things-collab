@@ -1,23 +1,23 @@
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
 import fetchPosts from '../api'
 import PostCard from '../components/layout/PostCard';
 import { Box, Divider } from '@mui/material';
 import PostType from '../types/PostType'
+import { useLoaderData } from 'react-router-dom';
+
+export async function loader() {
+    const fetchedPosts = await fetchPosts();
+    const posts = fetchedPosts.data.posts;
+    return { posts };
+}
 
 export default function Index(){
 
-    const [ fetchedPosts, setFetchedPosts] = useState<PostType[]>([]);
+    const { posts } = useLoaderData() as {posts:PostType[]};
 
-    useEffect(()=>{
-        async function requestPosts(){
-            const posts = await fetchPosts();
-            setFetchedPosts(posts.data.posts);
-        }
-        requestPosts();
-    },[])
-
-    console.log(fetchedPosts);
+   
+    console.log(posts);
 
     return (
         <Box>
@@ -39,7 +39,7 @@ export default function Index(){
                 {/* Category Post Carousel*/}
                 <Box display="flex" flexWrap={"wrap"} gap={"1rem"}>
                     {
-                        fetchedPosts.map((post)=>{
+                        posts.map((post)=>{
                             return <PostCard key={post.id} post={post}/>
                         })
                     }

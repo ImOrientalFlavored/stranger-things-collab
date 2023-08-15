@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { Box } from "@mui/material";
 import SvgIcon from '@mui/material/SvgIcon';
-import Logo from "../logo";
+import Logo from "../Logo";
 
 export default function Footer() {
   return (

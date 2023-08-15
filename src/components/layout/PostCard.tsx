@@ -9,26 +9,31 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 //import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import { useTheme } from '@emotion/react';
-//import { useContext } from 'react';
-import { tokens } from '../../theme';
+
 import { useNavigate } from 'react-router-dom';
+import { tokens } from '../../theme';
 
 interface PostCardProp{
     post : PostType
 }
 
+interface CustomTheme {
+    palette:{
+        mode:string
+    }
+}
+
 export default function PostCard({post}: PostCardProp){
-    const theme = useTheme();
+    const theme = useTheme() as CustomTheme;
     const colors = tokens(theme.palette.mode);
     const navigate = useNavigate();
-    //const colorMode = useContext(ColorModeContext);
     console.log('PostCard ID:')
     console.log(post.id);
     
     return(
     <Card sx={{ 
-        width: 300,
-        height: 400,
+        width: 450,
+        height: 320,
         display: 'flex',
     }}>
         <Box position={'relative'} width={'100%'} overflow={"clip"}>

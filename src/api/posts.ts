@@ -71,33 +71,131 @@ async function fakeNetwork(key) {
   return new Promise(res => {
     setTimeout(res, Math.random() * 800);
   });
+  import localforage from "localforage";
+  import { matchSorter } from "match-sorter";
+  import sortBy from "sort-by";
 } */
 
-import localforage from "localforage";
-import { matchSorter } from "match-sorter";
-import sortBy from "sort-by";
+import STResponse from "../types/STResponse";
+import { BASE_URL } from ".";
+import PostType from "../types/PostType";
 
 
 export async function getPosts(){
-  
+  try{
+    const req = await fetch(BASE_URL+'/posts');
+    const res = await req.json() as STResponse;
+    return res.data.posts;
+  }catch(err){
+    console.error(err);
+  }
 }
 
-export async function createPost(){
+export async function createPost(token:string,post:PostType){
+/*
+{
+  method:"POST",
+  headers: 
+  {
+    Content-Type:application/json, 
+    Authorization:`Bearer${token}`
+  }
 
+  body: JSON.stringify({
+    post:{title, description, price, location, willDeliver}
+  })
+}
+Return STResponse{}
+*/    
+  try {
+    const response = await fetch(`${BASE_URL}/posts`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({post})
+    });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+    console.error(err);
+  }
 }
 
-export async function getPost(){
-
+export async function getPost(postId:string|number){
+  try{
+      const req = await fetch(BASE_URL+postId);
+      const res = await req.json();
+      console.log(res);
+      return res;
+  }catch(error){
+      console.error(error);
+  }
 }
 
-export async function updatePost(){
 
+export async function updatePost(id:string|number, token:string, post:PostType){
+/*
+`${BASE_URL}/posts/${post._id}`,{
+  method:"PATCH",
+  headers:{
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${TOKEN_STRING_HERE}`
+  },
+  body:JSON.stringify({
+    post:{
+      title: "My favorite stuffed animal",
+      description: "This is a pooh doll from 1973. It has been carefully taken care of since I first got it.",
+      price: "$480.00",
+      location: "New York, NY",
+      willDeliver: true
+    }
+  }),
+}
+*/
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({post})
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-export async function deletePost(){
-
+export async function deletePost(id: string|number,token:string){
+/*
+`${BASE_URL}/posts/${post._id}`,{
+  method:"PATCH",
+  headers:{
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${TOKEN_STRING_HERE}`
+  },
+}
+  */
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${id}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-function set(){
-
-}
+//function set(){}

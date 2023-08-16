@@ -1,14 +1,13 @@
 import Typography from '@mui/material/Typography';
 //import { useEffect, useState } from 'react';
-import fetchPosts from '../api'
 import PostCard from '../components/layout/PostCard';
 import { Box, Divider } from '@mui/material';
 import PostType from '../types/PostType'
 import { useLoaderData } from 'react-router-dom';
+import { getPosts } from '../api/posts';
 
 export async function loader() {
-    const fetchedPosts = await fetchPosts();
-    const posts = fetchedPosts.data.posts;
+    const posts = await getPosts();
     return { posts };
 }
 
@@ -16,7 +15,6 @@ export default function Index(){
 
     const { posts } = useLoaderData() as {posts:PostType[]};
 
-   
     console.log(posts);
 
     return (

@@ -1,3 +1,4 @@
+/// <reference types="vite-plugin-svgr/client" />
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import {
@@ -8,9 +9,9 @@ import {
 } from "react-router-dom";
 import "./index.css";
 //Routes
-import Root from "./routes/Root";
+import Root, {loader as rootLoader} from "./routes/Root";
 import ErrorPage from "./ErrorPage";
-import Index from "./routes/Index";
+import Index, {loader as indexLoader} from "./routes/Index";
 import EditPost from "./routes/Edit";
 import Post from "./routes/Post";
 import SignInForm from "./routes/SignInForm";
@@ -22,12 +23,16 @@ const router = createBrowserRouter(
     <Route
       path="/"
       element={<Root />}
-      //loader={rootLoader}
+      loader={rootLoader}
       //action={rootAction}
       errorElement={<ErrorPage />}
     >
       <Route errorElement={<ErrorPage />}>
-        <Route index element={<Index />} />
+        <Route 
+          index 
+          element={<Index />}
+          loader={indexLoader}
+        />
         <Route
           path="/posts/:postId"
           element={<Post />}

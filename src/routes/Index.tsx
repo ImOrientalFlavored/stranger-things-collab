@@ -5,6 +5,7 @@ import { Box, Divider } from '@mui/material';
 import PostType from '../types/PostType'
 import { useLoaderData } from 'react-router-dom';
 import { getPosts } from '../api/posts';
+import Header from '../components/layout/Header';
 
 export async function loader() {
     const posts = await getPosts();
@@ -20,17 +21,15 @@ export default function Index(){
     return (
         <Box>
             {/* Page Title */}
-            <Box>
-                <Typography variant='h1' justifySelf={"center"}>
-                    Index
-                </Typography>
-                <Divider />
+            <Box display={"flex"} justifyContent={"center"}>
+                <Header title="Stranger's Things" subtitle="You're at a strange place, at a strange time, looking at strange things but we don't find it strange."/>
+                <Divider variant='inset' />
             </Box>
             {/* Category Group */}
             <Box>
             {/* Category Header*/}
                 <Box>
-                    <Typography variant='h1' justifySelf={"center"}>
+                    <Typography variant='h2' justifySelf={"center"} mb={"1rem"} fontWeight={"bold"}>
                         Recent Posts
                     </Typography>
                 </Box>

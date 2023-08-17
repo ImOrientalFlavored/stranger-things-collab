@@ -35,7 +35,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MailIcon from '@mui/icons-material/Mail';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 //
 
 const drawerWidth = 240;

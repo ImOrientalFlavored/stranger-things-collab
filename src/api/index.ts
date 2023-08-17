@@ -1,6 +1,6 @@
 import localforage from "localforage";
-import sortBy from "sort-by";
-import matchSort from "matchSorter";
+//import sortBy from "sort-by";
+//import matchSort from "matchSorter";
 import { sendUserTest } from "./test";
 
 const COHORT_NAME = '2302-ACC-PT-WEB-PT-A'

@@ -35,6 +35,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MailIcon from '@mui/icons-material/Mail';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 //
 
 const drawerWidth = 240;
@@ -120,7 +121,8 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
   const colorMode = useContext(ColorModeContext);
   const isLoggedIn = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  
+  //const {authState:[isAuth,setIsAuth]} = useOutletContext() as {authState: [boolean , React.Dispatch<React.SetStateAction<boolean>>]};
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -189,9 +191,15 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
                     :
                       ''
                   }
-                  <IconButton onClick={()=>setIsLoggedIn(!isLoggedIn)}>
-                    {!isLoggedIn ? <LoginOutlinedIcon /> : <LogoutOutlinedIcon /> }
-                  </IconButton>
+                    {!isLoggedIn ? 
+                      <IconButton onClick={()=>navigate('/sign-in')}>
+                        <LoginOutlinedIcon/> 
+                      </IconButton>
+                      : 
+                      <IconButton onClick={async ()=> setIsLoggedIn(!isLoggedIn)}>
+                        <LogoutOutlinedIcon/> 
+                      </IconButton>
+                    }
 
                 </Box>
               </Box>

@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import "./index.css";
 //Routes
-import Root from "./routes/Root";
+import Root, {loader as rootLoader} from "./routes/Root";
 import ErrorPage from "./ErrorPage";
 import Index, {loader as indexLoader} from "./routes/Index";
 import EditPost from "./routes/Edit";
@@ -22,7 +22,7 @@ const router = createBrowserRouter(
     <Route
       path="/"
       element={<Root />}
-      //loader={rootLoader}
+      loader={rootLoader}
       //action={rootAction}
       errorElement={<ErrorPage />}
     >

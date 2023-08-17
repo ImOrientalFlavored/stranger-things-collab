@@ -71,8 +71,6 @@ async function fakeNetwork(key) {
   return new Promise(res => {
     setTimeout(res, Math.random() * 800);
   });
-  import localforage from "localforage";
-  import { matchSorter } from "match-sorter";
   import sortBy from "sort-by";
 } */
 
@@ -197,5 +195,3 @@ export async function deletePost(id: string|number,token:string){
     console.error(err);
   }
 }
-
-//function set(){}

@@ -12,15 +12,10 @@ import { useTheme } from '@emotion/react';
 
 import { useNavigate } from 'react-router-dom';
 import { tokens } from '../../theme';
+import CustomTheme from '../../types/CustomTheme';
 
 interface PostCardProp{
     post : PostType
-}
-
-interface CustomTheme {
-    palette:{
-        mode:string
-    }
 }
 
 export default function PostCard({post}: PostCardProp){
@@ -32,7 +27,7 @@ export default function PostCard({post}: PostCardProp){
     
     return(
     <Card sx={{ 
-        width: 450,
+        width: 425,
         height: 320,
         display: 'flex',
     }}>

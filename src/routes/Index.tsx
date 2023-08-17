@@ -6,6 +6,7 @@ import PostType from '../types/PostType'
 import Header from '../components/layout/Header';
 import { useLoaderData } from 'react-router-dom';
 import { getPosts } from '../api/posts';
+import Header from '../components/layout/Header';
 
 
 export async function loader() {

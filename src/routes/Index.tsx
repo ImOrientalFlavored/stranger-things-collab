@@ -21,7 +21,12 @@ export default function Index(){
     return (
         <Box>
             {/* Page Title */}
-            <Box display={"flex"} justifyContent={"center"}>
+            <Box 
+                display={"flex"} 
+                justifyContent={"center"}
+                position={'relative'} 
+                left={"-10%"}
+            >
                 <Header title="Stranger's Things" subtitle="You're at a strange place, at a strange time, looking at strange things but we don't find it strange."/>
                 <Divider variant='inset' />
             </Box>

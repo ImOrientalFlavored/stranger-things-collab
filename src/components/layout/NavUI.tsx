@@ -17,7 +17,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Container, InputBase } from '@mui/material';
+import { Container, InputBase, Paper } from '@mui/material';
 import { ColorModeContext, tokens} from "../../theme";
 import { useContext } from "react";
 import { AuthContext } from '../../routes/Root'
@@ -29,13 +29,16 @@ import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 //import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 //Icons
+import SearchIcon from '@mui/icons-material/Search';
+import ClearSharpIcon from '@mui/icons-material/ClearSharp';
 import MenuIcon from '@mui/icons-material/Menu';
 //import AddIcon from '@mui/icons-material/Add';
 import FlagIcon from '@mui/icons-material/Flag';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MailIcon from '@mui/icons-material/Mail';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Logo from '../Logo';
 //
 
 const drawerWidth = 240;
@@ -121,8 +124,13 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
   const colorMode = useContext(ColorModeContext);
   const isLoggedIn = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [searchParams, setSearchParams] = useState('');
   //const {authState:[isAuth,setIsAuth]} = useOutletContext() as {authState: [boolean , React.Dispatch<React.SetStateAction<boolean>>]};
   const navigate = useNavigate();
+
+  const handleClearSearch = () => {
+    setSearchParams('');
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -131,6 +139,11 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleSearchQuery = () => {
+    console.log("Searching for " + searchParams);
+    
+  }
 
   return (
     <Container maxWidth={'xl'}>
@@ -160,12 +173,58 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
                 {//"Left side of Top Nav - Logo, SiteName, Search"
                 }
                 <Box display={'flex'}>
-                  <Typography variant="h6" zIndex={"10"} noWrap component="div" sx={{ 
-                    textShadow:"0 0 1em #414141"}}>
-                    Stranger's Things
-                  </Typography>
-                  <Box bgcolor={colors.primary[100]}  sx={{ml:"5px" ,borderRadius:"20px"}}>
-                    <InputBase sx={{p:"0 10px 0 10px", color:colors.primary[800] ,borderRadius:"20px"}}/>
+                  <Box display={'flex'} alignItems={'center'}>
+                  
+                    <Logo />  
+                  
+                    <Typography variant="h3" fontSize={'32px'}  fontFamily={'Scary Hours'} fontWeight={"bold"} position={'relative'} top={"15%"} zIndex={"10"} noWrap component="div">
+                      Stranger's Things
+                    </Typography>
+                  </Box>
+                
+                  <Box 
+                    position={'relative'} 
+                    left={'5%'}
+                    width={"475px"}
+                    >
+                    <Paper
+                      component="form"
+                      sx={{ 
+                        p: '2px 4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        position:'relative',
+                        top:'20%',
+                        height:35,
+                        width: 475,
+                        borderRadius:"20px" }}
+                      >
+                      <InputBase
+                        sx={{ ml: 1, flex: 1,  }}
+                        placeholder="Search"
+                        value={searchParams}
+                        onChange={(e)=>setSearchParams(e.target.value)}
+                        inputProps={{ 'aria-label': 'search google maps' }}
+                      />
+                      { searchParams.length > 0 ?
+                      (<IconButton type="button"
+                       sx={{ p: '10px' }} 
+                       aria-label="clear"
+                       onClick={()=>handleClearSearch()}
+                       >
+                        <ClearSharpIcon />
+                      </IconButton>):(''
+                      )}
+                      <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+                      <IconButton 
+                      type="button" 
+                      sx={{ p: '10px' }} 
+                      aria-label="search"
+                      onClick={()=>handleSearchQuery()}
+                      >
+                        <SearchIcon />
+                      </IconButton>
+                    </Paper>
                   </Box>
                   
                 </Box>

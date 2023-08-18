@@ -1,4 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './styles/fonts.css';
 
+::-webkit-scrollbar{
+    background-color: rgb(#000000);
+}
+
+html{
+    scrollbar-color: blue, black;
+    scrollbar-width: thin;
+}

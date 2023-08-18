@@ -1,5 +1,5 @@
 import { createContext, useState, useMemo } from "react";
-import { createTheme } from "@mui/material";
+import { ThemeOptions, createTheme } from "@mui/material";
 
 /*Hex Codes: #f0f14e #6ded8a #1645f5 #ff5f85 #ed3833
  
@@ -265,7 +265,7 @@ export const useMode = () => {
         }),
         []
     );
-    const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+    const theme = useMemo(() => createTheme(themeSettings(mode) as ThemeOptions), [mode]);
 
     return [theme, colorMode];
 

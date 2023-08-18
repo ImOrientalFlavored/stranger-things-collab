@@ -1,5 +1,6 @@
-import { ReactSVG } from "react-svg";
+
+import {ReactComponent as Logo2} from '../../public/ori-logo.svg'
 
 export default function Logo(){
-    return <ReactSVG src="./ori-logo.svg" />
+    return <Logo2 width={"50px"} height={"40px"}  />
 }

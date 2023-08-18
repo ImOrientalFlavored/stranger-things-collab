@@ -14,7 +14,8 @@ export default function Header({title, subtitle}:HeaderProps){
             <Typography
                 variant="h2"
                 color={colors.greenAccent[500]}
-                fontWeight={"bold"}
+                fontFamily={'Scary Hours'}
+                fontWeight={'bold'}
                 sx={{
                     mb:"5px",
                     fontSize:"72px"
@@ -22,6 +23,7 @@ export default function Header({title, subtitle}:HeaderProps){
             >{title}</Typography>
             <Typography
                 variant="h6"
+                fontStyle={'italic'}
                 color={colors.greenAccent[700]}
 
             >{subtitle}</Typography>

@@ -27,25 +27,39 @@ export default function PostCard({post}: PostCardProp){
     
     return(
     <Card sx={{ 
-        width: 425,
-        height: 320,
+        width: 320,
+        height: 250,
         display: 'flex',
+        flexShrink: 0,
+        textOverflow:'clip',
     }}>
-        <Box position={'relative'} width={'100%'} overflow={"clip"}>
+        <Box position={'relative'} width={'100%'} >
             <CardActionArea onClick={()=> navigate(`/posts/${post._id}`)}>
                 <CardMedia
                 component="img"
-                height="120"
+                sx={{border: '1px solid grey'}}
+                height="80"
                 image="/static/images/cards/contemplative-reptile.jpg"
-                alt="green iguana"
+                alt="  Some Image"
                 />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" fontSize={"18px"} component="div" color={colors.greenAccent[500]}>
-                        {post.title}
-                    </Typography>
-                    <Typography variant="body1" textOverflow={"ellipsis"} fontSize="1rem" component="div" color="text.secondary" height={'400px'}>
-                        {post.description}
-                    </Typography>
+                <CardContent sx={{overflow:'clip'}}>
+                        <Typography gutterBottom variant="h5" fontSize={"18px"} component="div" color={colors.greenAccent[500]}>
+                            {post.title}
+                        </Typography>
+                    <Box textOverflow={'ellipsis'} overflow={'hidden'} height={'200px'}>
+                        <Typography 
+                           
+                            component="div" 
+                            color="text.secondary" 
+                            height={'200px'}
+                            sx={{
+                                display:'inline-block',
+                                wordBreak:'break-word'
+                            }}
+                        >
+                            {post.description}
+                        </Typography>
+                    </Box>
                 </CardContent>
             </CardActionArea>
             <CardActions>
@@ -54,11 +68,18 @@ export default function PostCard({post}: PostCardProp){
                 flexDirection={"row"} 
                 justifyContent={"space-between"}
                 alignContent={"end"}
-                color={"white"} width={'100%'} 
+                color={"white"} 
+                width={'100%'} 
                 position={'absolute'} 
                 bottom={'0'}
                 right={'0'}
-                borderTop={'2px solid grey'}
+                zIndex={20}
+                borderTop={'1px solid grey'}
+                sx={{
+                    backgroundColor:`${colors.grey[700]}`,
+                    boxShadow: '20px 0 5px 10px #0000002c '
+                    
+                }}
                 >
                 <IconButton size='large'>
                         <Icon>

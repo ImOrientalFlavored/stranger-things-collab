@@ -5,7 +5,7 @@ type ContentPaneProp ={
   }
 
 export default function ContentPane({children}:ContentPaneProp){
-    return <Box padding={'1rem'} width={'100%'} height={'100%'} minHeight={'81vh'}>
+    return <Box width={'92vw'} height={'100%'} minHeight={'81vh'}>
         {children}
     </Box>
 }

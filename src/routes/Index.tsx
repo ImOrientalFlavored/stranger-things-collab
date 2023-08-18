@@ -3,14 +3,12 @@
 import PostCard from '../components/layout/PostCard';
 import { Box, Divider } from '@mui/material';
 import PostType from '../types/PostType'
+import Header from '../components/layout/Header';
 import { useLoaderData } from 'react-router-dom';
 import { getPosts } from '../api/posts';
 import Header from '../components/layout/Header';
 import Carousel from '../components/layout/Carousel';
-//import { useTheme } from '@emotion/react';
-//import { tokens } from '../theme';
-//import CustomTheme from '../types/CustomTheme';
-// eslint-disable-next-line react-refresh/only-export-components
+
 export async function loader() {
     const posts = await getPosts();
     return { posts };

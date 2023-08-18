@@ -1,0 +1,20 @@
+@font-face{
+    font-family:'Wizardry Night';
+    src:local('Wizardry Night'),
+    url('../assets/fonts/Wizardry Night.tff'),
+    format('truetype');
+}
+
+@font-face{
+    font-family:'Spooky Place';
+    src:local('Spooky Place'),
+    url('../assets/fonts/Spooky Place.tff'),
+    format('truetype');
+}
+
+@font-face{
+    font-family:'Scary Hours';
+    src:local('Scary Hours'),
+    url('../assets/fonts/Scary Hours.tff'),
+    format('truetype');
+}

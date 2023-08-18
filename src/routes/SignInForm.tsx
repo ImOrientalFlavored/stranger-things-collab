@@ -27,7 +27,7 @@ import styled from '@emotion/styled';
 //import { tokens } from '../theme';
 import { loginUser, setLocalUser } from '../api/user';
 import UserType from '../types/UserType';
-import { setLocalToken } from '../api';
+import { setLocalToken, setUserToken } from '../api';
 import React from 'react';
   
   // 👇 Styled React Route Dom Link Component
@@ -76,15 +76,15 @@ import React from 'react';
   const SignInForm: FC = () => {
     const navigate = useNavigate();
     const {
-      tokenState:[setToken],
-      userState:[setUser],
-      authState:[setIsAuth],
-      loginState:[setIsLoggedIn]
+      tokenState:[token, setToken],
+      userState:[user, setUser],
+      authState:[isAuth, setIsAuth],
+      loginState:[isLoggedIn, setIsLoggedIn]
     } = useOutletContext()as
-    { tokenState: [React.Dispatch<React.SetStateAction<string>>],
-      userState: [ React.Dispatch<React.SetStateAction<string>>],
-      authState: [React.Dispatch<React.SetStateAction<boolean>>],
-      loginState: [React.Dispatch<React.SetStateAction<boolean>>],
+    { tokenState: [string, React.Dispatch<React.SetStateAction<string>>],
+      userState: [string, React.Dispatch<React.SetStateAction<string>>],
+      authState: [boolean, React.Dispatch<React.SetStateAction<boolean>>],
+      loginState: [boolean, React.Dispatch<React.SetStateAction<boolean>>],
     }
     
     ;

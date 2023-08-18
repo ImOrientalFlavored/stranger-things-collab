@@ -177,7 +177,7 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
                   
                     <Logo />  
                   
-                    <Typography variant="h3" fontWeight={"bold"} position={'relative'} top={"15%"} zIndex={"10"} noWrap component="div">
+                    <Typography variant="h3" fontSize={'32px'}  fontFamily={'Scary Hours'} fontWeight={"bold"} position={'relative'} top={"15%"} zIndex={"10"} noWrap component="div">
                       Stranger's Things
                     </Typography>
                   </Box>

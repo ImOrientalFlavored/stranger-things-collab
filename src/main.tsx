@@ -11,12 +11,14 @@ import "./index.css";
 //Routes
 import Root, {loader as rootLoader} from "./routes/Root";
 import ErrorPage from "./ErrorPage";
-import Index, {loader as indexLoader} from "./routes/Index";
+import Index from "./routes/Index";
 import EditPost from "./routes/Edit";
 import Post from "./routes/Post";
 import SignInForm from "./routes/SignInForm";
 import SignUpForm from "./routes/SignUpForm";
 import PostForm from "./routes/PostForm";
+import SearchPage from "./routes/SearchPage";
+import { postLoader } from "./api/posts";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,7 +33,12 @@ const router = createBrowserRouter(
         <Route 
           index 
           element={<Index />}
-          loader={indexLoader}
+          loader={postLoader}
+        />
+        <Route
+          path="/search/*"
+          element={<SearchPage />}
+          loader={postLoader}
         />
         <Route
           path="/posts/:postId"

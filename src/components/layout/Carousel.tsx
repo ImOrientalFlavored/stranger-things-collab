@@ -73,7 +73,7 @@ interface CarouselProps{
     children?: React.ReactNode;
 }
 
-const carouselWidth = 1500;
+const carouselWidth = 1600;
 const cardWidth = 320;
 const buttonHeight = 260;
 const gapWidth = 20;    
@@ -111,6 +111,8 @@ export default function Carousel({title, subtitle='' ,children}:CarouselProps){
    
     return(
         <Box>
+
+            {/* Header */}
             <Box display={'flex'} flexDirection={'row'} alignItems={'center'} >
                 <Typography variant='h2' mb={"1rem"} fontWeight={"bold"}>
                         {title}
@@ -120,6 +122,8 @@ export default function Carousel({title, subtitle='' ,children}:CarouselProps){
                     {subtitle}
                 </Typography>
             </Box>
+
+            {/* Carousel */}
             <Box boxShadow={`inset 0 0 100px 30px ${colors.blueAccent[900]}`}>
                 <Box id='carousel-btn-lt' display={'flex'} flexWrap={'nowrap'} flexDirection={'row'} justifyContent={'space-between'} border={'1px solid black'}>
                     {/**Carousel Button Left */}
@@ -139,6 +143,7 @@ export default function Carousel({title, subtitle='' ,children}:CarouselProps){
                             }}/>
                         </Button>
                     </Box>
+
                     {/**Carousel Card Container */}
                     <Box 
                     id='carousel-container' 

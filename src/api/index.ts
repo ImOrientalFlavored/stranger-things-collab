@@ -27,7 +27,6 @@ Return Data:
 
 */
 
-
 export default async function fetchPosts(){
     try{
         const req = await fetch(BASE_URL+'/posts');

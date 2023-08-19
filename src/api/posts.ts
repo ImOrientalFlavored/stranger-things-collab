@@ -78,6 +78,10 @@ import STResponse from "../types/STResponse";
 import { BASE_URL } from ".";
 import PostType from "../types/PostType";
 
+export async function postLoader() {
+  const posts = await getPosts();
+  return { posts };
+}
 
 export async function getPosts(){
   try{

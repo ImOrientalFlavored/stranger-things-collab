@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import React from 'react';
+import { matchSorter } from "match-sorter";
 //routes, layouts
+
+//
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -37,8 +39,9 @@ import FlagIcon from '@mui/icons-material/Flag';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MailIcon from '@mui/icons-material/Mail';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../Logo';
+import fetchPosts from '../../api';
 //
 
 const drawerWidth = 240;
@@ -117,6 +120,7 @@ type NavUIProp ={
   children?:React.ReactNode
 }
 
+
 export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
     
   const theme = useTheme();
@@ -140,9 +144,10 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
     setOpen(false);
   };
 
-  const handleSearchQuery = () => {
-    console.log("Searching for " + searchParams);
-    
+  const handleSearchQuery = async () => {
+    const posts = await fetchPosts();
+    const filteredPosts = matchSorter(posts.data.posts, searchParams, {keys:["title", "description"]})
+    navigate(`/search?posts=${JSON.stringify(filteredPosts)}`);
   }
 
   return (
@@ -151,7 +156,7 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
         display: 'flex',
         bgcolor: '#f0f0f0'
       }}>
-        <CssBaseline />
+        {/* Top Bar */}
         <AppBar position="fixed" open={open} sx={{
         }}>
             <Toolbar>
@@ -173,15 +178,18 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
                 {//"Left side of Top Nav - Logo, SiteName, Search"
                 }
                 <Box display={'flex'}>
-                  <Box display={'flex'} alignItems={'center'}>
-                  
+                  <Box display={'flex'} alignItems={'start'}  position={'relative'} top={'15%'}>
+                  <Link to={'/'}>
                     <Logo />  
-                  
+              
+                  </Link>
                     <Typography variant="h3" fontSize={'32px'}  fontFamily={'Scary Hours'} fontWeight={"bold"} position={'relative'} top={"15%"} zIndex={"10"} noWrap component="div">
                       Stranger's Things
                     </Typography>
+                  
                   </Box>
-                
+
+                {/* Search Bar */}
                   <Box 
                     position={'relative'} 
                     left={'5%'}
@@ -204,7 +212,7 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
                         placeholder="Search"
                         value={searchParams}
                         onChange={(e)=>setSearchParams(e.target.value)}
-                        inputProps={{ 'aria-label': 'search google maps' }}
+                        inputProps={{ 'aria-label': 'search posts' }}
                       />
                       { searchParams.length > 0 ?
                       (<IconButton type="button"
@@ -220,7 +228,7 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
                       type="button" 
                       sx={{ p: '10px' }} 
                       aria-label="search"
-                      onClick={()=>handleSearchQuery()}
+                      onClick={async ()=> await handleSearchQuery()}
                       >
                         <SearchIcon />
                       </IconButton>
@@ -259,12 +267,12 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
                         <LogoutOutlinedIcon/> 
                       </IconButton>
                     }
-
                 </Box>
               </Box>
               
             </Toolbar>
         </AppBar>
+        {/* Sidebar */}
         <Drawer variant="permanent" open={open} sx={{backgroundColor:colors.primary[900]}}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
@@ -302,12 +310,12 @@ export default function NavUI({setIsLoggedIn, children}:NavUIProp) {
           </List>
           <Divider />
         </Drawer>
+
         <Box component="main" bgcolor={colors.primary[900]} color={colors.greenAccent[400]} sx={{ flexGrow: 1, }}>
           <DrawerHeader sx={{backgroundColor:colors.primary[900]}} />
-          
             {children}
-        
         </Box>
+
       </Box>
     </Container>
   );

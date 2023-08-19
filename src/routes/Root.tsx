@@ -46,7 +46,6 @@ export default function Root(){
             <ThemeProvider theme={theme as unknown as Partial<Theme>}>
                 <CssBaseline />
                 <AuthContext.Provider value={isLoggedIn}>
-
                 <NavUI setIsLoggedIn={setIsLoggedIn}>
                     <main>
                         <ContentPane>
